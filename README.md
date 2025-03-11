@@ -1,32 +1,67 @@
-# books_recommendation_engine
+# Books Recommendation
+```bash
+             +----------------+
+             |     User       |
+             +----------------+
+                     |
+                     v
+           +---------------------+
+           |   Send Request      |
+           | (User ID, Session,  |
+           |  context info, etc.)|
+           +---------------------+
+                     |
+                     v
+           +---------------------+
+           |   API Endpoint      |
+           | (e.g., Flask or     |
+           |  FastAPI Handler)   |
+           +---------------------+
+                     |
+                     v
+           +---------------------+
+           | Recommendation      |
+           | Engine (Inference)  |
+           +----------+----------+
+                      |
+                      v
+       +-------------------------------+
+       | Retrieve Data for User:       |
+       | - User Profile & History      |
+       | - Book Metadata & Catalog     |
+       | - Real-Time Interaction Data  |
+       |   (Recent clicks/ratings)     |
+       +-------------------------------+
+                      |
+                      v
+       +-------------------------------+
+       | Compute Candidate Items:      |
+       | - Apply Hybrid Model          |
+       |   (Collaborative +            |
+       |    Content-Based)             |
+       +-------------------------------+
+                      |
+                      v
+       +-------------------------------+
+       | Rank & Filter Recommendations |
+       | (Sort by Relevance Score,      |
+       |  apply business rules, etc.)   |
+       +-------------------------------+
+                      |
+                      v
+           +---------------------+
+           | Return Top-N Results|
+           +---------------------+
+                      |
+                      v
+           +---------------------+
+           | API Sends Response  |
+           +---------------------+
+                      |
+                      v
+             +----------------+
+             |     User       |
+             | Receives Recs  |
+             +----------------+
+```
 
-flowchart TD
-    A[Start]
-    B[Data Collection<br>(Book-Crossing, Goodreads, Amazon Reviews)]
-    C[Data Preprocessing & Cleaning]
-    D[Data Splitting (Train/Test)]
-    E[Offline Model Training<br>(Collaborative Filtering, Matrix Factorization)]
-    F[Model Evaluation<br>(RMSE, Precision, Recall)]
-    G[Deploy Model via API<br>(Flask/FastAPI)]
-    H[User Receives Recommendations]
-
-    I[Real-Time Pipeline Setup]
-    J[Streaming Ingestion<br>(Kafka)]
-    K[Real-Time Consumer Processing]
-    L[Incremental Model Updates<br>(Online Learning)]
-    M[Hybrid Recommendation Update]
-
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-    E --> F
-    F --> G
-    G --> H
-
-    F --> I
-    I --> J
-    J --> K
-    K --> L
-    L --> M
-    M --> G
